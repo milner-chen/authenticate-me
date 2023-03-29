@@ -40,6 +40,7 @@ const storeCurrentUser = (user) => {
         sessionStorage.setItem('currentUser', JSON.stringify(user));
     } else {
         sessionStorage.removeItem('currentUser');
+        console.log('user should be null');
     }
 }
 
@@ -70,6 +71,20 @@ export const storeCSRFToken = (res) => {
     // }
 }
 
+export const signup = (user) => async (dispatch) => {
+    // make fetch to add user to backend db
+    const res = await csrfFetch('/api/users', {
+        method: 'POST',
+        // remember to turn object into JSON
+        body: JSON.stringify(user)
+    });
+    // parse response
+    const data = await res.json();
+    // store user from response in sessionStorage
+    storeCurrentUser(data.user);
+    // add user to the store
+    dispatch(receiveUser(data.user));
+}
 // nest under user
 // const initialState = { user: null };
 const initialState = { user: JSON.parse(sessionStorage.getItem('currentUser')) };
@@ -88,7 +103,9 @@ const sessionReducer = (state=initialState, action) => {
         case REMOVE_USER:
             // delete newState[action.userId];
             newState.user = null;
+            console.log("newState:", newState)
             return newState;
+            // return { ...state, user: null };
         default:
             return state;
     }

@@ -13,6 +13,7 @@ const csrfFetch = async (url, options={}) => {
     if (options.method.toUpperCase() !== 'GET') {
         options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token');
         options.headers['Content-Type'] = 'application/json';
+        console.log(options.method);
     }
 
     const res = await fetch(url, options);
