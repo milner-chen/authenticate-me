@@ -1,17 +1,30 @@
 import React from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import configureStore from './store';
-import csrfFetch, { restoreCSRF } from './store/csrf';
+import csrfFetch from './store/csrf';
+import * as sessionActions from './store/session';
+
+// let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+// let initialState = {};
+
+// if (currentUser) {
+//     initialState = {
+//         user: {
+//         [currentUser.id]: currentUser
+//         }
+//     };
+// };
 
 const store = configureStore();
 
 if (process.env.NOVE_ENV !== 'production') {
   window.store = store;
   window.csrfFetch = csrfFetch;
+  window.sessionActions = sessionActions;
 }
 
 function Root() {
@@ -34,9 +47,11 @@ const renderApplication = () => {
 }
 
 // if there is no token
-if (sessionStorage.getItem('X-CSRF-Token') === null) {
+if (sessionStorage.getItem('X-CSRF-Token') === null
+|| sessionStorage.getItem('currentUser') === null) {
   // restore token + then render app
-  restoreCSRF().then(renderApplication);
+  // remember that thunk actions have to be dispatched 
+  store.dispatch(sessionActions.restoreSession()).then(renderApplication);
   // if there is a token, then render app
 } else renderApplication();
 
