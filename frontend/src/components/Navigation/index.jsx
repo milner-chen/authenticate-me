@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
+import './Navigation.css';
 
 const Navigation = () => {
     const currentUser = useSelector(state => state.session.user);

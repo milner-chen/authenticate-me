@@ -1,0 +1,35 @@
+ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: tomato;
+}
+
+.dropdown {
+    justify-content: right;
+    background-color: antiquewhite;
+    color: cadetblue;
+    font-size: 16px;
+    padding: 15px;
+    width: fit-content;
+    /* display: flex;
+    flex-direction: column; */
+    position: relative;
+}
+
+.fa-user {
+    /* padding: 5px; */
+    width: min-content;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+}
+
+.user-info {
+    /* background-color: antiquewhite; */
+    
+}

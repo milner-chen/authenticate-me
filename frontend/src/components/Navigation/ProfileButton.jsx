@@ -29,10 +29,10 @@ const ProfileButton = ({ user }) => {
 
     return (
         <>    
-            <div style={{ color: "cadetblue", fontSize: "20px" }}>
+            <div className="dropdown">
                 <i onClick={openMenu} className="fa-solid fa-user"></i>
                 {showMenu && 
-                    <div>
+                    <div className="user-info">
                         <p>{user.username}</p>
                         <p>{user.email}</p>
                         <button onClick={() => dispatch(sessionActions.logout())}>Logout</button>
