@@ -7,7 +7,7 @@ const Navigation = () => {
 
     let links;
     currentUser ?
-    links = <ProfileButton /> :
+    links = <ProfileButton user={currentUser} /> :
     links =
     <>
         <Link to="/login">Login</Link>
