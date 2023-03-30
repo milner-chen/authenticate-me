@@ -1,15 +1,15 @@
-.login-form {
+.signup-form {
     /* margin: 100px auto;
     width: fit-content;
     height: fit-content; */
     margin: 20px;
 }
 
-.login-form input {
+.signup-form input {
     display: block;
     margin-bottom: 15px;
 }
 
-.login-form li {
+.signup-form li {
     color: red;
 }

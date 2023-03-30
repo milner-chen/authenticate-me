@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 // import { useSelector } from "react-redux";
+import './SignupForm.css';
 
 
 const SignupFormPage = () => {
@@ -43,7 +44,7 @@ const SignupFormPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="signup-form">
             <ul>
                 {errors.map(error => <li key={error}>{error}</li> )}
             </ul>
