@@ -4,24 +4,24 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './LoginForm.css';
 
-const LoginFormPage = () => {
+const LoginForm = () => {
 
     // get the current user stored in the session slice of state
     const dispatch = useDispatch();
     // debugger;
-    const currentUser = useSelector(state => {
-        const testing = state.session.user;
-        console.log(testing);
-        return testing;
-    });
+    // const currentUser = useSelector(state => {
+    //     const testing = state.session.user;
+    //     console.log(testing);
+    //     return testing;
+    // });
     
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     // store errors as a
     const [errors, setErrors] = useState([]);
     
-    // if user is already logged in, redirect to homepage
-    if (currentUser) return <Redirect to="/" />;
+    // // if user is already logged in, redirect to homepage
+    // if (currentUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,4 +54,4 @@ const LoginFormPage = () => {
     )
 }
 
-export default LoginFormPage;
+export default LoginForm;

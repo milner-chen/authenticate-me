@@ -7,11 +7,11 @@ function App() {
   return (
     <>
       <Navigation />
-      <Switch>
-        {/* <h1>Hello from App</h1> */}
-        <Route path="/login" component={LoginFormPage}/>
-        <Route path="/signup" component={SignupFormPage} />
-      </Switch>
+        <Switch>
+          {/* <h1>Hello from App</h1> */}
+          {/* <Route path="/login" component={LoginFormPage}/> */}
+          <Route path="/signup" component={SignupFormPage} />
+        </Switch>
     </>
   );
 }

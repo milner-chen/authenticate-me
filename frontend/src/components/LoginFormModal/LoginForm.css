@@ -1,0 +1,15 @@
+.login-form {
+    /* margin: 100px auto;
+    width: fit-content;
+    height: fit-content; */
+    margin: 20px;
+}
+
+.login-form input {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.login-form li {
+    color: red;
+}

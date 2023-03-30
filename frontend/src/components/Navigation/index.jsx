@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import LoginFormModal from '../LoginFormModal';
 
 const Navigation = () => {
     const currentUser = useSelector(state => state.session.user);
@@ -11,9 +12,10 @@ const Navigation = () => {
     links = <ProfileButton user={currentUser} /> :
     links =
     <>
-        <Link to="/login">Login</Link>
+        {/* <Link to="/login">Login</Link> */}
+        <LoginFormModal />
         <Link to="/signup">Signup</Link>
-    </>
+    </>;
 
     return (
         <ul>
@@ -23,4 +25,4 @@ const Navigation = () => {
     )
 }
 
-export default Navigation
+export default Navigation;

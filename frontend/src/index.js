@@ -7,6 +7,7 @@ import App from './App';
 import configureStore from './store';
 import csrfFetch from './store/csrf';
 import * as sessionActions from './store/session';
+import { ModalProvider } from './context/Modal';
 
 // let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 // let initialState = {};
@@ -29,14 +30,17 @@ if (process.env.NOVE_ENV !== 'production') {
 
 function Root() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  )
+    <ModalProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ModalProvider>
+  );
 }
 
+// wrap Root in our modal context provider
 const renderApplication = () => {
   ReactDOM.render(
     <React.StrictMode>
