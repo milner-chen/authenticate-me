@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
       render :show
     else
       # status will show error message on console
-      render json: { errors: @user.errors.full_messages }#, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages }, status: 422#:unprocessable_entity
     end
     # render json: user_params
   end

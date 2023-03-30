@@ -23,19 +23,26 @@ const SignupFormPage = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        // let data;
         if (password === confirmPassword) {
-            setErrors([]);
-            dispatch(sessionActions.signup({
+            // setErrors([]);
+            const res = dispatch(sessionActions.signup({
                 username: username,
                 email: email,
                 password: password
             }))
             .catch(async res => {
-                const data = await res.json();
-                if (data.errors) setErrors(data.errors);
+            // console.log(res);
+            const data = await res.json();
+            // console.log(data);
+            if (data.errors) setErrors(data.errors);
             })
+            // .then(async res => {
+                // data = await res.clone().json();
+                // console.log(await res.json());
 
+            // });
+            // console.log(data);
             
         } else {
             setErrors([]);

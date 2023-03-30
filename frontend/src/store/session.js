@@ -6,6 +6,7 @@ const RECEIVE_USER = 'session/RECEIVE_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
 export const receiveUser = (user) => {
+    console.log('payload for receiveUser', user);
     return {
         type: RECEIVE_USER,
         payload: user
@@ -14,10 +15,9 @@ export const receiveUser = (user) => {
 
 // ACTION CREATORS
 
-export const removeUser = (userId) => {
+export const removeUser = () => {
     return {
-        type: REMOVE_USER,
-        userId
+        type: REMOVE_USER
     }
 }
 
@@ -37,10 +37,13 @@ export const login = (user) => async (dispatch) => {
 
 const storeCurrentUser = (user) => {
     if (user) {
+        console.log('this is the user being stored', user);
         sessionStorage.setItem('currentUser', JSON.stringify(user));
     } else {
+        sessionStorage.getItem('currentUser');
         sessionStorage.removeItem('currentUser');
         console.log('user should be null');
+        console.log(sessionStorage.getItem('currentUser'));
     }
 }
 
@@ -80,13 +83,28 @@ export const signup = (user) => async (dispatch) => {
     });
     // parse response
     const data = await res.json();
+    // console.log("data", data);
+    // console.log("data", data.user);
     // store user from response in sessionStorage
     storeCurrentUser(data.user);
     // add user to the store
-    dispatch(receiveUser(data.user));
+    if (data.user) dispatch(receiveUser(data.user));
+    return res;
 }
 // nest under user
 // const initialState = { user: null };
+
+export const logout = () => async (dispatch) => {
+    //  fetch backend
+    const res = csrfFetch('/api/session', {
+        method: 'DELETE'
+    });
+    // dispatch frontend action to remove user
+    dispatch(removeUser());
+    // will removeItem if no user is passed
+    storeCurrentUser(null);
+}
+
 const initialState = { user: JSON.parse(sessionStorage.getItem('currentUser')) };
 
 // REDUCER
@@ -98,8 +116,11 @@ const sessionReducer = (state=initialState, action) => {
         case RECEIVE_USER:
             // newState[action.payload.id] = action.payload;
             newState.user = action.payload;
-            console.log(newState);
+            // console.log(action);
+            // console.log(action.payload);
+            // console.log(newState.user);
             return newState;
+            // return { ...state, user: action.payload }
         case REMOVE_USER:
             // delete newState[action.userId];
             newState.user = null;
